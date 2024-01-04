@@ -27,9 +27,13 @@ submit.addEventListener('click', (e) => {
   e.preventDefault();
   addAndDisplayBook();
   dialog.close();
-  const removeBtn = document.querySelectorAll('tr > td > button');
+  const removeBtn = document.querySelectorAll('tr > td > .remove');
   removeBtn.forEach((btn) => {
     btn.addEventListener('click', deleteBook);
+  })
+  const statusBtn = document.querySelectorAll('tr > td > .status');
+  statusBtn.forEach((btn) => {
+    btn.addEventListener('click', toggleStatus);
   })
   clearForm();
 });
@@ -88,10 +92,18 @@ function addAndDisplayBook() {
   const numberOfDaysChild = tableRow.querySelector('td:nth-child(7)');
   numberOfDaysChild.textContent = numberOfDays(startDateInput.value, endDateInput.value);
 
+  const statusChild = tableRow.querySelector('td:nth-child(8)');
+  const statusBtn = document.createElement('button');
+  statusBtn.textContent = statusChild.textContent;
+  statusChild.textContent = "";
+  statusBtn.classList.add('status');
+  statusChild.appendChild(statusBtn);
+
   const removeBookData = document.createElement('td');
   const removeBook = document.createElement('button');
   removeBook.textContent = 'Remove Book';
   removeBook.setAttribute('data-position', myLibrary.length - 1);
+  removeBook.classList.add('remove');
   removeBookData.appendChild(removeBook);
   tableRow.appendChild(removeBookData);
   table.appendChild(tableRow);
@@ -138,9 +150,21 @@ function deleteBook() {
   rows[this.dataset.position].remove();
 
   //recalculate each button position
-  const buttons = document.querySelectorAll('table > tr > td > button');
+  const buttons = document.querySelectorAll('table > tr > td > .remove');
   for (let i = 0; i < myLibrary.length; i++){
     buttons[i].setAttribute('data-position', i);
+  }
+}
+
+function toggleStatus(){
+  if (this.textContent === 'Not Read') {
+    this.textContent = 'Read';
+    this.style.backgroundColor = 'green';
+    this.style.color = 'white';
+  } else {
+    this.textContent = 'Not Read';
+    this.style.backgroundColor = 'red';
+    this.style.color = 'white';
   }
 }
 
