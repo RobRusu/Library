@@ -27,7 +27,7 @@
           <th>End date</th>
           <th>Number of days</th>
           <th>Status</th>
-          <th>Remove book</th>
+          <th>Remove</th>
         </tr>
       </thead>
     </table>
@@ -36,38 +36,38 @@
     <h2>Add a new book</h2>
     <form>
       <div class="book">
-        <label for="book">Book: </label>
+        <label for="book">Book</label>
         <input type="text" name="book" id="book" required>
       </div>
       <div class="author">
-        <label for="author">Author: </label>
+        <label for="author">Author</label>
         <input type="text" name="author" id="author" required>
       </div>
       <div class="pages">
-        <label for="pages">Number of pages: </label>
+        <label for="pages">Number of pages</label>
         <input type="number" name="pages" id="pages" min="1" max="999" required>
       </div>
       <div class="pagesRead">
-        <label for="pagesRead">Pages read: </label>
+        <label for="pagesRead">Pages read</label>
         <input type="number" name="pagesRead" id="pagesRead" min="1" max="999">
       </div>
       <div class="startDate">
-        <label for="startDate">Start date: </label>
+        <label for="startDate">Start date</label>
         <input type="date" name="startDate" id="startDate" required>
       </div>
       <div class="endDate">
-        <label for="endDate">End date: </label>
+        <label for="endDate">End date</label>
         <input type="date" name="endDate" id="endDate">
       </div>
       <div class="status">
-        <label for="status">Status: </label>
+        <label for="status">Status</label>
         <select name="status" id="status">
           <option value="default" >Choose status</option>
           <option value="Read">Read</option>
           <option value="Not Read">Not read</option>
         </select>
       </div>
-      <button class="close">Close</button>
+      <button class="close">ESC</button>
       <button class="submit">Submit</button>
     </form>
   </dialog>

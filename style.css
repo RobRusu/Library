@@ -23,11 +23,10 @@
   font-weight: bold;
   font-size: 1.2vh;
   border-radius: 5px;
-}
-
-.header > button:hover{
-  cursor: pointer;
-  background-color: #425da7;
+  &:hover {
+    cursor: pointer;
+    background-color: #425da7;
+  }
 }
 
 .books {
@@ -38,18 +37,6 @@
 ::backdrop {
   background-color: rgb(66, 66, 65);
   opacity: 0.5;
-}
-
-dialog {
-  top: 30%;
-  left: 30%;
-  position: absolute;
-  text-align: center;
-}
-
-form {
-  height: 40vh;
-  width: 40vw;
 }
 
 td > input {
@@ -93,4 +80,83 @@ table > tr > td > button {
   border: none;
   font-weight: bold;
   font-size: inherit;
+  padding: 0 5px;
+}
+
+dialog {
+  top: 30%;
+  left: 30%;
+  position: absolute;
+  text-align: center;
+  border: 5px solid #1f2937;
+  border-radius: 5px;
+}
+
+dialog > h2 {
+  height: 5vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Rubik Doodle Shadow', system-ui;
+  background-color: #1f2937;
+  font-size: min(2vh, 2vw);
+  color: white;
+  margin-bottom: 4vh;
+}
+
+form {
+  height: 40vh;
+  width: 40vw;
+  position: relative;
+}
+
+form > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+form > div > input,
+form > div > select {
+  width: 20vw;
+  text-align: center;
+  margin-bottom: 1vh;
+}
+
+form > div > label,
+form > div > input,
+form > div > select {
+  font-size: calc(0.5vh + 8px)
+}
+
+form > .close {
+  position: absolute;
+  top: -3.5vh;
+  right: 0.5vw;
+  padding: 0.5rem;
+  border: 2px solid #1f2937;
+  color: #1f2937;
+  font-weight: bold;
+  font-size: calc(0.5vh + 8px);
+  background-color: white;
+  &:hover {
+    background-color: #1f2937;
+    color: white;
+    cursor: pointer;
+  }
+}
+
+form > .submit {
+  margin-top: 5vh;
+  padding: 1vh 3vw;
+  border: 3px solid #1f2937;
+  color: #1f2937;
+  font-weight: bold;
+  border-radius: 5px;
+  background-color: white;
+  &:hover {
+    cursor: pointer;
+    background-color: #1f2937;
+    color: white;
+  }
 }
