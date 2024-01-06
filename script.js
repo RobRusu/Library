@@ -35,6 +35,21 @@ submit.addEventListener('click', (e) => {
   statusBtn.forEach((btn) => {
     btn.addEventListener('click', toggleStatus);
   })
+  const endDateChange = document.querySelectorAll('tr > td:nth-child(6) > input');
+  endDateChange.forEach((date) => {
+    date.addEventListener('change', recalculateDays);
+  })
+  const statusCheck = document.querySelectorAll('tr > td:nth-child(8) > button');
+  statusCheck.forEach((check) => {
+    if (check.textContent === 'Read') {
+      check.style.backgroundColor = 'green';
+      check.style.color = 'white';
+    } else {
+      check.textContent = 'Not Read'
+      check.style.backgroundColor = 'red';
+      check.style.color = 'white';
+    }
+  })
   clearForm();
 });
 
@@ -85,12 +100,14 @@ function addAndDisplayBook() {
   const endDateChild = tableRow.querySelector('td:nth-child(6)');
   const endDateInput = document.createElement('input');
   endDateInput.setAttribute('type', 'date');
+  endDateInput.setAttribute('data-position', myLibrary.length - 1);
   endDateInput.value = endDateChild.textContent;
   endDateChild.textContent = ""
   endDateChild.appendChild(endDateInput);
 
   const numberOfDaysChild = tableRow.querySelector('td:nth-child(7)');
   numberOfDaysChild.textContent = numberOfDays(startDateInput.value, endDateInput.value);
+  newBook.days = numberOfDaysChild.textContent;
 
   const statusChild = tableRow.querySelector('td:nth-child(8)');
   const statusBtn = document.createElement('button');
@@ -151,9 +168,19 @@ function deleteBook() {
 
   //recalculate each button position
   const buttons = document.querySelectorAll('table > tr > td > .remove');
+  const dates = document.querySelectorAll('table > tr > td:nth-child(6) > input')
   for (let i = 0; i < myLibrary.length; i++){
     buttons[i].setAttribute('data-position', i);
+    dates[i].setAttribute('data-position', i);
   }
+}
+
+function recalculateDays() {
+  const newValue = document.querySelector('tr > td:nth-child(6) > input');
+  const newDays = document.querySelector('tr > td:nth-child(7)');
+  myLibrary[this.dataset.position].endDate = newValue.value;
+  newDays.textContent = numberOfDays(myLibrary[this.dataset.position].startDate, myLibrary[this.dataset.position].endDate);
+  myLibrary[this.dataset.position].days = newDays.textContent;
 }
 
 function toggleStatus(){
