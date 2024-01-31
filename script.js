@@ -13,6 +13,7 @@ const endDate = form.querySelector('#endDate');
 const days = numberOfDays(startDate.value, endDate.value);
 
 
+
 showBtn.addEventListener('click', () => {
   dialog.showModal();
 })
@@ -50,25 +51,39 @@ submit.addEventListener('click', (e) => {
       check.style.color = 'white';
     }
   })
-  clearForm();
+  new Book().clearForm;
 });
 
 const myLibrary = [];
 
-function Book(book, author, pages, readPages, startDate, endDate, days, status) {
-  this.book = book;
-  this.author = author;
-  this.pages = pages;
-  this.readPages = readPages;
-  this.startDate = startDate;
-  this.endDate = endDate;
-  this.days = days;
-  this.status = status;
+class Book {
+  constructor (book, author, pages, readPages, startDate, endDate, days, status) {
+    this.book = book;
+    this.author = author;
+    this.pages = pages;
+    this.readPages = readPages;
+    this.startDate = startDate;
+    this.endDate = endDate;
+    this.days = days;
+    this.status = status;
+  }
+
+  get clearForm() {
+    const status = form.querySelector('#status');
+    book.value = "";
+    author.value = "";
+    pages.value = "";
+    pagesRead.value = "";
+    startDate.value = "";
+    endDate.value = "";
+    status.value = "default";
+  }
 }
+
+
 
 function addAndDisplayBook() {
   //add book to library
-
   const status = form.querySelector('#status');
   const newBook = new Book(book.value, author.value, pages.value, pagesRead.value, startDate.value, endDate.value, days, status.value)
   myLibrary.push(newBook);
@@ -124,17 +139,6 @@ function addAndDisplayBook() {
   removeBookData.appendChild(removeBook);
   tableRow.appendChild(removeBookData);
   table.appendChild(tableRow);
-}
-
-function clearForm() {
-  const status = form.querySelector('#status');
-  book.value = "";
-  author.value = "";
-  pages.value = "";
-  pagesRead.value = "";
-  startDate.value = "";
-  endDate.value = "";
-  status.value = "default";
 }
 
 function numberOfDays (startDate, endDate) {
