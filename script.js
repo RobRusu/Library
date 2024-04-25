@@ -23,34 +23,78 @@ closeBtn.addEventListener('click', (e) => {
 })
 
 
+book.addEventListener('input', (e) =>{
+  if (book.validity.valueMissing){
+    book.setCustomValidity("This field is required, please fill it in.");
+  } else {
+    book.setCustomValidity("");
+  }
+});
+
+pages.addEventListener('input', (e) =>{
+  if (pages.validity.valueMissing){
+    pages.setCustomValidity("This field is required, please fill it in.");
+  } else {
+    pages.setCustomValidity("");
+  }
+});
+
+author.addEventListener('input', (e) =>{
+  if (author.validity.valueMissing){
+    author.setCustomValidity("This field is required, please fill it in.");
+  } else {
+    author.setCustomValidity("");
+  }
+});
+
+startDate.addEventListener('input', (e) =>{
+  if (startDate.validity.valueMissing){
+    startDate.setCustomValidity("This field is required, please fill it in.");
+  } else {
+    startDate.setCustomValidity("");
+  }
+});
+
 submit.addEventListener('click', (e) => {
-  e.preventDefault();
-  addAndDisplayBook();
-  dialog.close();
-  const removeBtn = document.querySelectorAll('tr > td > .remove');
-  removeBtn.forEach((btn) => {
-    btn.addEventListener('click', deleteBook);
-  })
-  const statusBtn = document.querySelectorAll('tr > td > .status');
-  statusBtn.forEach((btn) => {
-    btn.addEventListener('click', toggleStatus);
-  })
-  const endDateChange = document.querySelectorAll('tr > td:nth-child(6) > input');
-  endDateChange.forEach((date) => {
-    date.addEventListener('change', recalculateDays);
-  })
-  const statusCheck = document.querySelectorAll('tr > td:nth-child(8) > button');
-  statusCheck.forEach((check) => {
-    if (check.textContent === 'Read') {
-      check.style.backgroundColor = 'green';
-      check.style.color = 'white';
-    } else {
-      check.textContent = 'Not Read'
-      check.style.backgroundColor = 'red';
-      check.style.color = 'white';
-    }
-  })
-  clearForm();
+  if (book.validity.valueMissing){
+    book.setCustomValidity("This field is required, please fill it in.");
+  } else if (author.validity.valueMissing){
+    author.setCustomValidity("This field is required, please fill it in.");
+  } else if (pages.validity.valueMissing){
+    pages.setCustomValidity("This field is required, please fill it in.");
+  } else if (startDate.validity.valueMissing) {
+    startDate.setCustomValidity("This field is required, please fill it in.");
+  } else if (pages.validity.rangeOverflow || pages.validity.rangeUnderflow){
+    pages.setCustomValidity("Out of range. Number needs to be between 1 and 999.");
+  } else {
+    e.preventDefault();
+    addAndDisplayBook();
+    dialog.close();
+    const removeBtn = document.querySelectorAll('tr > td > .remove');
+    removeBtn.forEach((btn) => {
+      btn.addEventListener('click', deleteBook);
+    })
+    const statusBtn = document.querySelectorAll('tr > td > .status');
+    statusBtn.forEach((btn) => {
+      btn.addEventListener('click', toggleStatus);
+    })
+    const endDateChange = document.querySelectorAll('tr > td:nth-child(6) > input');
+    endDateChange.forEach((date) => {
+      date.addEventListener('change', recalculateDays);
+    })
+    const statusCheck = document.querySelectorAll('tr > td:nth-child(8) > button');
+    statusCheck.forEach((check) => {
+      if (check.textContent === 'Read') {
+        check.style.backgroundColor = 'green';
+        check.style.color = 'white';
+      } else {
+        check.textContent = 'Not Read'
+        check.style.backgroundColor = 'red';
+        check.style.color = 'white';
+      }
+    })
+    clearForm();
+  }
 });
 
 const myLibrary = [];
@@ -194,11 +238,3 @@ function toggleStatus(){
     this.style.color = 'white';
   }
 }
-
-
-
-
-
-
-
-

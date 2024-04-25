@@ -160,3 +160,7 @@ form > .submit {
     color: white;
   }
 }
+
+input:invalid {
+  border: 2px dashed rgb(226, 63, 63);
+}
